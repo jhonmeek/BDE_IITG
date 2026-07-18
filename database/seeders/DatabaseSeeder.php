@@ -4,36 +4,16 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $permissions = [
-            'manage dashboard',
-            'manage bureau members',
-            'manage clubs',
-            'manage events',
-            'manage registrations',
-            'manage transactions',
-            'manage documents',
-            'manage historical entries',
-            'manage media assets',
-            'manage contact messages',
-        ];
+        $this->call(RolePermissionSeeder::class);
 
-        foreach ($permissions as $permission) {
-            Permission::findOrCreate($permission, 'web');
+        if (! app()->environment('local')) {
+            return;
         }
-
-        $superAdmin = Role::findOrCreate('super_admin', 'web');
-        $memberRole = Role::findOrCreate('membre_bde', 'web');
-        Role::findOrCreate('public', 'web');
-
-        $superAdmin->syncPermissions($permissions);
-        $memberRole->syncPermissions($permissions);
 
         $admin = User::updateOrCreate(
             ['email' => 'admin@bde-iitg.test'],
@@ -47,7 +27,7 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
-        $admin->syncRoles([$superAdmin]);
+        $admin->syncRoles(['super_admin']);
 
         $member = User::updateOrCreate(
             ['email' => 'membre@bde-iitg.test'],
@@ -61,7 +41,7 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
-        $member->syncRoles([$memberRole]);
+        $member->syncRoles(['membre_bde']);
 
         $this->call(DemoContentSeeder::class);
     }
