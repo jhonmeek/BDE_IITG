@@ -24,8 +24,7 @@ const normalizedItems = computed(() =>
 <template>
     <SiteLayout title="Videos et medias">
         <section class="mb-10">
-            <p class="badge-soft">Galerie</p>
-            <h1 class="section-title mt-4">Videos historiques et medias du bureau</h1>
+            <h1 class="section-title">Videos historiques et medias du bureau</h1>
             <p class="section-copy mt-4">
                 Retrouvez les capsules, archives visuelles et moments marquants de la vie du campus.
             </p>
@@ -59,7 +58,7 @@ const normalizedItems = computed(() =>
                     </div>
                 </div>
                 <h2 class="mt-5 text-2xl font-semibold">{{ item.title }}</h2>
-                <p class="mt-2 text-sm font-semibold uppercase tracking-[0.18em]" style="color: var(--bde-red);">{{ item.collection }}</p>
+                <p class="mt-1 text-sm font-medium" style="color: var(--bde-gold-text);">{{ item.collection }}</p>
                 <p class="mt-4 text-sm leading-6 text-slate-600">{{ item.caption }}</p>
                 <a v-if="item.url" :href="item.url" target="_blank" class="mt-4 inline-flex text-sm font-semibold" style="color: var(--bde-red);">
                     Ouvrir le media

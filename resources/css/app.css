@@ -9,13 +9,14 @@
 
 @layer base {
     :root {
-        --bde-gold: #d79a0d;
-        --bde-gold-deep: #b77f08;
-        --bde-blue: #070d82;
+        --bde-blue: #101573;
+        --bde-blue-dark: #0b0f56;
+        --bde-gold: #b77f08;
+        --bde-gold-soft: #f3e3c2;
+        --bde-gold-text: #7c5a06;
         --bde-red: #a71207;
-        --bde-green: #2de30d;
-        --bde-cyan: #00aaff;
-        --bde-ivory: #fff8ec;
+        --bde-paper: #faf8f3;
+        --bde-ink: #1f2937;
     }
 
     html {
@@ -24,11 +25,9 @@
     }
 
     body {
-        @apply text-slate-900 antialiased;
-        background:
-            radial-gradient(circle at top left, rgba(215, 154, 13, 0.18), transparent 28%),
-            radial-gradient(circle at top right, rgba(7, 13, 130, 0.14), transparent 26%),
-            linear-gradient(180deg, #fffdf8 0%, #fff6e1 36%, #f6f7ff 100%);
+        @apply antialiased;
+        background-color: var(--bde-paper);
+        color: var(--bde-ink);
     }
 
     h1,
@@ -40,18 +39,17 @@
     }
 
     a {
-        @apply transition;
+        @apply transition-colors;
     }
 }
 
 @layer components {
     .shell-card {
-        @apply rounded-[2rem] border bg-white/90 shadow-[0_24px_70px_-42px_rgba(7,13,130,0.45)] backdrop-blur;
-        border-color: rgba(215, 154, 13, 0.28);
+        @apply rounded-xl border border-stone-200 bg-white shadow-sm;
     }
 
     .section-title {
-        @apply text-3xl font-semibold sm:text-4xl;
+        @apply text-2xl font-bold sm:text-3xl;
     }
 
     .section-copy {
@@ -59,83 +57,68 @@
     }
 
     .btn-primary {
-        @apply inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2;
-        background: linear-gradient(135deg, var(--bde-blue), #1022be);
-        box-shadow: 0 16px 36px -24px rgba(7, 13, 130, 0.9);
+        @apply inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2;
+        background-color: var(--bde-blue);
     }
 
     .btn-primary:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 20px 40px -24px rgba(7, 13, 130, 0.95);
+        background-color: var(--bde-blue-dark);
     }
 
     .btn-secondary {
-        @apply inline-flex items-center justify-center rounded-full border bg-white/90 px-5 py-3 text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-offset-2;
-        border-color: rgba(215, 154, 13, 0.55);
-        color: var(--bde-red);
+        @apply inline-flex items-center justify-center rounded-lg border border-stone-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition focus:outline-none focus:ring-2 focus:ring-offset-2;
     }
 
     .btn-secondary:hover {
-        border-color: var(--bde-green);
-        color: var(--bde-green);
-        background: rgba(255, 255, 255, 0.98);
+        border-color: var(--bde-gold);
+        color: var(--bde-gold-text);
     }
 
     .input-shell {
-        @apply mt-1 w-full rounded-2xl border bg-white px-4 py-3 text-sm text-slate-900 shadow-sm;
-        border-color: rgba(7, 13, 130, 0.12);
+        @apply mt-1 w-full rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm text-slate-900;
     }
 
     .input-shell:focus {
-        border-color: rgba(215, 154, 13, 0.9);
-        box-shadow: 0 0 0 3px rgba(215, 154, 13, 0.16);
+        border-color: var(--bde-blue);
+        box-shadow: 0 0 0 3px rgba(16, 21, 115, 0.12);
         outline: none;
     }
 
     .badge-soft {
-        @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em];
-        background: rgba(215, 154, 13, 0.16);
-        color: var(--bde-red);
+        @apply inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold;
+        background: var(--bde-gold-soft);
+        color: var(--bde-gold-text);
     }
 
     .admin-link {
-        @apply flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-medium text-slate-600 transition hover:bg-slate-900 hover:text-white;
+        @apply flex items-center justify-between rounded-lg px-4 py-3 text-sm font-medium text-slate-600 transition hover:bg-slate-900 hover:text-white;
     }
 
     .admin-link.active {
         @apply bg-slate-900 text-white;
     }
 
-    .site-topbar {
-        background: var(--bde-gold);
-        color: white;
-    }
-
-    .site-topbar a {
-        color: white;
-    }
-
     .site-nav-link {
-        @apply rounded-full px-4 py-2 text-sm font-semibold;
-        color: var(--bde-red);
+        @apply rounded-lg px-3.5 py-2 text-sm font-medium text-slate-700;
     }
 
     .site-nav-link:hover {
-        color: var(--bde-green);
-        background: rgba(45, 227, 13, 0.08);
+        color: var(--bde-blue);
+        background: rgba(16, 21, 115, 0.06);
+    }
+
+    .site-nav-link.active {
+        color: var(--bde-blue);
+        @apply bg-white font-semibold shadow-sm ring-1 ring-stone-200;
     }
 
     .hero-panel {
-        background:
-            linear-gradient(135deg, rgba(7, 13, 130, 0.94), rgba(19, 31, 163, 0.88)),
-            linear-gradient(180deg, rgba(215, 154, 13, 0.25), rgba(215, 154, 13, 0));
+        background-color: var(--bde-blue-dark);
         color: white;
     }
 
     .legacy-photo-frame {
-        @apply overflow-hidden rounded-[1.75rem] border bg-white;
-        border-color: rgba(255, 255, 255, 0.28);
-        box-shadow: 0 20px 48px -30px rgba(7, 13, 130, 0.9);
+        @apply overflow-hidden rounded-xl border border-white/15 bg-white/5;
     }
 
     .legacy-grid-image {
@@ -143,13 +126,13 @@
     }
 
     .site-footer {
-        background: var(--bde-blue);
-        color: #dbeafe;
+        background-color: var(--bde-blue-dark);
+        color: #cbd5e1;
     }
 
     .site-footer h3,
     .site-footer h4 {
-        color: var(--bde-cyan);
+        color: white;
     }
 
     .site-footer a:hover {

@@ -25,8 +25,7 @@ const submit = () => form.post(route('clubs.register'));
 <template>
     <SiteLayout title="Clubs">
         <section class="mb-10">
-            <p class="badge-soft">Clubs</p>
-            <h1 class="section-title mt-4">Les clubs educatifs, sportifs et communautaires</h1>
+            <h1 class="section-title">Les clubs educatifs, sportifs et communautaires</h1>
             <p class="section-copy mt-4">
                 Inscrivez-vous a un ou plusieurs clubs pour participer a la vie du campus et developper vos competences.
             </p>
@@ -41,7 +40,7 @@ const submit = () => form.post(route('clubs.register'));
                         :alt="club.name"
                         class="mb-4 h-20 w-20 rounded-[1.5rem] object-cover"
                     />
-                    <p class="text-xs font-semibold uppercase tracking-[0.2em]" style="color: var(--bde-red);">{{ club.category }}</p>
+                    <p class="text-sm font-medium" style="color: var(--bde-gold-text);">{{ club.category }}</p>
                     <h2 class="mt-3 text-2xl font-semibold">{{ club.name }}</h2>
                     <p class="mt-2 text-sm text-slate-500">Responsable : {{ club.lead_name }}</p>
                     <p class="mt-4 text-sm leading-6 text-slate-600">{{ club.description }}</p>
@@ -53,7 +52,6 @@ const submit = () => form.post(route('clubs.register'));
             </div>
 
             <div class="shell-card p-6 sm:p-8">
-                <p class="badge-soft">Inscription</p>
                 <h2 class="mt-4 text-2xl font-semibold">Rejoindre un ou plusieurs clubs</h2>
                 <form class="mt-6 space-y-4" @submit.prevent="submit">
                     <div class="grid gap-4 sm:grid-cols-2">

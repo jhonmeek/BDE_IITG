@@ -25,7 +25,6 @@ const submit = () => form.post(route('events.register', props.event.slug));
     <SiteLayout :title="event.name">
         <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
             <article class="shell-card p-8 sm:p-10">
-                <p class="badge-soft">Evenement BDE</p>
                 <h1 class="mt-5 text-4xl font-semibold">{{ event.name }}</h1>
                 <img
                     v-if="event.cover_image_url"
@@ -43,7 +42,6 @@ const submit = () => form.post(route('events.register', props.event.slug));
             </article>
 
             <div class="shell-card p-6 sm:p-8">
-                <p class="badge-soft">Participation</p>
                 <h2 class="mt-4 text-2xl font-semibold">S inscrire a cet evenement</h2>
 
                 <form v-if="event.registration_enabled" class="mt-6 space-y-4" @submit.prevent="submit">
@@ -89,7 +87,7 @@ const submit = () => form.post(route('events.register', props.event.slug));
                         :alt="item.name"
                         class="mb-4 aspect-[16/9] w-full rounded-[1.25rem] object-cover"
                     />
-                    <p class="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">{{ formatDateTime(item.starts_at) }}</p>
+                    <p class="text-sm font-medium" style="color: var(--bde-gold-text);">{{ formatDateTime(item.starts_at) }}</p>
                     <h3 class="mt-3 text-xl font-semibold">{{ item.name }}</h3>
                     <p class="mt-3 text-sm leading-6 text-slate-600">{{ item.excerpt }}</p>
                     <Link :href="route('events.show', item.slug)" class="mt-4 inline-flex text-sm font-semibold" style="color: var(--bde-red);">

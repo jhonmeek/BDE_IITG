@@ -22,8 +22,7 @@ const submit = () => form.post(route('contact.store'));
     <SiteLayout title="Contact">
         <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <section class="shell-card p-8">
-                <p class="badge-soft">Contact</p>
-                <h1 class="section-title mt-4">Parler au Bureau des Etudiants</h1>
+                <h1 class="section-title">Parler au Bureau des Etudiants</h1>
                 <div class="mt-6 space-y-4 text-sm leading-7 text-slate-600">
                     <p><span class="font-semibold text-slate-900">Email :</span> {{ settings.contact_email }}</p>
                     <p><span class="font-semibold text-slate-900">Telephone :</span> {{ settings.contact_phone }}</p>
@@ -48,7 +47,6 @@ const submit = () => form.post(route('contact.store'));
             </section>
 
             <section class="shell-card p-8">
-                <p class="badge-soft">Formulaire</p>
                 <h2 class="mt-4 text-2xl font-semibold">Envoyer un message</h2>
                 <form class="mt-6 space-y-4" @submit.prevent="submit">
                     <div>

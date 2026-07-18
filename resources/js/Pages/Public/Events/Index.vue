@@ -12,8 +12,7 @@ defineProps({
 <template>
     <SiteLayout title="Evenements">
         <section class="mb-10">
-            <p class="badge-soft">Agenda</p>
-            <h1 class="section-title mt-4">Les evenements du Bureau des Etudiants</h1>
+            <h1 class="section-title">Les evenements du Bureau des Etudiants</h1>
             <p class="section-copy mt-4">
                 Retrouvez les activites a venir, les rencontres institutionnelles, les forums et les journees de cohesion du campus.
             </p>
@@ -27,7 +26,7 @@ defineProps({
                     :alt="event.name"
                     class="mb-5 aspect-[16/9] w-full rounded-[1.75rem] object-cover"
                 />
-                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">{{ formatDateTime(event.starts_at) }}</p>
+                <p class="text-sm font-medium" style="color: var(--bde-gold-text);">{{ formatDateTime(event.starts_at) }}</p>
                 <h2 class="mt-4 text-2xl font-semibold">{{ event.name }}</h2>
                 <div class="mt-3 flex flex-wrap gap-4 text-sm text-slate-500">
                     <span>{{ event.location }}</span>

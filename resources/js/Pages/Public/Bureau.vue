@@ -10,8 +10,7 @@ defineProps({
 <template>
     <SiteLayout title="Bureau">
         <section class="mb-10">
-            <p class="badge-soft">Equipe BDE</p>
-            <h1 class="section-title mt-4">Le bureau des etudiants et ses responsables</h1>
+            <h1 class="section-title">Le bureau des etudiants et ses responsables</h1>
             <p class="section-copy mt-4">
                 Le BDE represente les etudiants aupres de l administration et coordonne les clubs, l animation du campus, la communication et la tresorerie.
             </p>
@@ -29,7 +28,7 @@ defineProps({
                     {{ member.name.charAt(0) }}
                 </div>
                 <h2 class="mt-4 text-2xl font-semibold">{{ member.name }}</h2>
-                <p class="mt-2 text-sm font-semibold uppercase tracking-[0.18em]" style="color: var(--bde-red);">{{ member.role_title }}</p>
+                <p class="mt-1 text-sm font-medium" style="color: var(--bde-gold-text);">{{ member.role_title }}</p>
                 <p class="mt-1 text-sm text-slate-500">{{ member.mandate_label }}</p>
                 <p class="mt-4 text-sm leading-6 text-slate-600">{{ member.bio }}</p>
                 <div class="mt-5 space-y-2 text-sm text-slate-500">

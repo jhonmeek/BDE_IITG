@@ -40,7 +40,7 @@ defineProps({
                         :alt="item.name"
                         class="mb-4 h-16 w-16 rounded-[1.25rem] object-cover"
                     />
-                    <p class="text-xs font-semibold uppercase tracking-[0.18em]" style="color: var(--bde-red);">{{ item.category }}</p>
+                    <p class="text-sm font-medium" style="color: var(--bde-gold-text);">{{ item.category }}</p>
                     <h3 class="mt-3 text-xl font-semibold">{{ item.name }}</h3>
                     <p class="mt-3 text-sm leading-6 text-slate-600">{{ item.summary }}</p>
                     <Link :href="route('clubs.show', item.slug)" class="mt-4 inline-flex text-sm font-semibold" style="color: var(--bde-red);">
