@@ -22,17 +22,26 @@ class DashboardController extends Controller
         $income = (float) Transaction::where('type', 'income')->sum('amount');
         $expense = (float) Transaction::where('type', 'expense')->sum('amount');
 
-        $monthly = collect(range(5, 0))
-            ->reverse()
-            ->map(function (int $offset) {
-                $date = now()->subMonths($offset);
+        $since = now()->subMonths(5)->startOfMonth();
 
-                return [
-                    'label' => $date->translatedFormat('M Y'),
-                    'start' => $date->copy()->startOfMonth(),
-                    'end' => $date->copy()->endOfMonth(),
-                ];
-            });
+        $recentTransactions = Transaction::query()
+            ->where('transaction_date', '>=', $since->toDateString())
+            ->get(['type', 'amount', 'transaction_date']);
+
+        $monthly = collect(range(5, 0))->map(function (int $offset) use ($recentTransactions) {
+            $date = now()->subMonths($offset);
+            $ofMonth = $recentTransactions->filter(
+                fn (Transaction $transaction) => $transaction->transaction_date->isSameMonth($date)
+            );
+
+            return [
+                'label' => $date->translatedFormat('M Y'),
+                'income' => (float) $ofMonth->where('type', 'income')->sum('amount'),
+                'expense' => (float) $ofMonth->where('type', 'expense')->sum('amount'),
+            ];
+        });
+
+        $eventsWithCounts = Event::withCount('registrations')->orderBy('starts_at')->limit(6)->get();
 
         return Inertia::render('Admin/Dashboard', [
             'stats' => [
@@ -50,12 +59,12 @@ class DashboardController extends Controller
             'charts' => [
                 'finance' => [
                     'labels' => $monthly->pluck('label')->values(),
-                    'income' => $monthly->map(fn (array $month) => (float) Transaction::where('type', 'income')->whereBetween('transaction_date', [$month['start']->toDateString(), $month['end']->toDateString()])->sum('amount'))->values(),
-                    'expense' => $monthly->map(fn (array $month) => (float) Transaction::where('type', 'expense')->whereBetween('transaction_date', [$month['start']->toDateString(), $month['end']->toDateString()])->sum('amount'))->values(),
+                    'income' => $monthly->pluck('income')->values(),
+                    'expense' => $monthly->pluck('expense')->values(),
                 ],
                 'events' => [
-                    'labels' => Event::withCount('registrations')->orderBy('starts_at')->limit(6)->get()->pluck('name'),
-                    'registrations' => Event::withCount('registrations')->orderBy('starts_at')->limit(6)->get()->pluck('registrations_count'),
+                    'labels' => $eventsWithCounts->pluck('name'),
+                    'registrations' => $eventsWithCounts->pluck('registrations_count'),
                 ],
             ],
             'recent' => [

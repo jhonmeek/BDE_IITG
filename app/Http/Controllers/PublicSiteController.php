@@ -16,6 +16,7 @@ use App\Models\HistoricalEntry;
 use App\Models\MediaAsset;
 use App\Models\SiteSetting;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -47,10 +48,10 @@ class PublicSiteController extends Controller
             'history' => HistoricalEntry::published()->limit(3)->get()->map(fn (HistoricalEntry $entry) => $this->historyData($entry)),
             'media' => MediaAsset::published()->limit(6)->get()->map(fn (MediaAsset $media) => $this->mediaData($media)),
             'stats' => [
-                'clubs' => Club::count(),
-                'events' => Event::count(),
+                'clubs' => Club::where('is_published', true)->count(),
+                'events' => Event::where('is_published', true)->count(),
                 'registrations' => ClubRegistration::count() + EventRegistration::count(),
-                'documents' => Document::count(),
+                'documents' => Document::where('is_public', true)->count(),
             ],
         ]);
     }
@@ -193,15 +194,17 @@ class PublicSiteController extends Controller
 
     private function settings(): array
     {
-        $settings = SiteSetting::query()->pluck('value', 'key')->all();
+        return Cache::rememberForever('site-settings', function (): array {
+            $settings = SiteSetting::query()->pluck('value', 'key')->all();
 
-        foreach ($settings as $key => $value) {
-            if ($value && Str::endsWith($key, '_path')) {
-                $settings[Str::replaceLast('_path', '_url', $key)] = Storage::url($value);
+            foreach ($settings as $key => $value) {
+                if ($value && Str::endsWith($key, '_path')) {
+                    $settings[Str::replaceLast('_path', '_url', $key)] = Storage::url($value);
+                }
             }
-        }
 
-        return $settings;
+            return $settings;
+        });
     }
 
     private function memberData(BureauMember $member): array
