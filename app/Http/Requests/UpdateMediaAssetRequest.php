@@ -22,6 +22,6 @@ class UpdateMediaAssetRequest extends FormRequest
      */
     public function rules(): array
     {
-        return (new StoreMediaAssetRequest())->rules();
+        return (new StoreMediaAssetRequest)->rules();
     }
 }

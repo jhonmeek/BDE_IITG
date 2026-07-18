@@ -22,6 +22,6 @@ class UpdateBureauMemberRequest extends FormRequest
      */
     public function rules(): array
     {
-        return (new StoreBureauMemberRequest())->rules();
+        return (new StoreBureauMemberRequest)->rules();
     }
 }

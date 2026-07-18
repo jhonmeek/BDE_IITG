@@ -15,7 +15,6 @@ use App\Models\SiteSetting;
 use App\Models\Transaction;
 use App\Models\TransactionAttachment;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
@@ -133,7 +132,7 @@ class ImportLegacyBdeData extends Command
             'hero_subtitle' => 'Rassemblement. Ambition. Dynamisme.',
             'hero_tagline' => "Comite pour l'Epanouissement academique",
             'hero_description' => "Le BDE est le relais entre les etudiants, les clubs et l'administration. Il soutient l'accueil, la representation, les evenements et les projets du campus.",
-            'footer_about' => "Nous representons et accompagnons les etudiants dans leurs initiatives, evenements et projets tout au long de leur parcours universitaire.",
+            'footer_about' => 'Nous representons et accompagnons les etudiants dans leurs initiatives, evenements et projets tout au long de leur parcours universitaire.',
             'contact_email' => 'bureau.etudiants@univ-exemple.edu',
             'contact_phone' => '+241 8976543',
             'contact_address' => "Institut International de Technologie et de Gestion, Libreville Avenue des Grandes ecoles, 100m de l'ENS",
@@ -243,7 +242,7 @@ class ImportLegacyBdeData extends Command
                 'category' => 'educatif',
                 'lead_name' => 'Coordination BDE',
                 'summary' => 'Decouvre les outils numeriques et developpe tes soft skills tech.',
-                'description' => "Le club informatique accompagne les etudiants dans la pratique des outils numeriques, la culture tech et les projets collaboratifs.",
+                'description' => 'Le club informatique accompagne les etudiants dans la pratique des outils numeriques, la culture tech et les projets collaboratifs.',
                 'image' => 'Assets/Images/logo/tech.jpg',
             ],
         ];
@@ -439,7 +438,7 @@ class ImportLegacyBdeData extends Command
         $database = config('legacy.mysql.database');
 
         if (! $database) {
-            $this->warn("Import MySQL ignore: aucune base legacy configuree via LEGACY_BDE_MYSQL_DATABASE.");
+            $this->warn('Import MySQL ignore: aucune base legacy configuree via LEGACY_BDE_MYSQL_DATABASE.');
 
             return;
         }
@@ -477,7 +476,7 @@ class ImportLegacyBdeData extends Command
     private function importLegacyContactMessages(string $connection): void
     {
         if (! DB::connection($connection)->getSchemaBuilder()->hasTable('contact_messages')) {
-            $this->warn("Table legacy absente: contact_messages");
+            $this->warn('Table legacy absente: contact_messages');
 
             return;
         }
@@ -504,7 +503,7 @@ class ImportLegacyBdeData extends Command
     private function importLegacyClubRegistrations(string $connection): void
     {
         if (! DB::connection($connection)->getSchemaBuilder()->hasTable('inscriptions_clubs')) {
-            $this->warn("Table legacy absente: inscriptions_clubs");
+            $this->warn('Table legacy absente: inscriptions_clubs');
 
             return;
         }

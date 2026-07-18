@@ -22,6 +22,6 @@ class UpdateHistoricalEntryRequest extends FormRequest
      */
     public function rules(): array
     {
-        return (new StoreHistoricalEntryRequest())->rules();
+        return (new StoreHistoricalEntryRequest)->rules();
     }
 }
