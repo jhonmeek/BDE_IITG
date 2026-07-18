@@ -17,8 +17,9 @@ class ClubRegistrationController extends Controller
             'registrations' => ClubRegistration::query()
                 ->with('club')
                 ->latest()
-                ->get()
-                ->map(fn (ClubRegistration $registration) => [
+                ->paginate(25)
+                ->withQueryString()
+                ->through(fn (ClubRegistration $registration) => [
                     'id' => $registration->id,
                     'club_name' => $registration->club?->name,
                     'last_name' => $registration->last_name,

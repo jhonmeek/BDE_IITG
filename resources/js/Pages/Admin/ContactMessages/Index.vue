@@ -1,10 +1,11 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
+import Pagination from '@/Components/Pagination.vue';
 import { formatDateTime } from '@/composables/useFormatters';
 import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
-    messages: Array,
+    messages: Object,
     statuses: Array,
 });
 
@@ -18,7 +19,7 @@ const remove = (id) => router.delete(route('admin.contact-messages.destroy', id)
 <template>
     <AdminLayout title="Messages de contact">
         <section class="space-y-4">
-            <article v-for="message in messages" :key="message.id" class="shell-card p-6">
+            <article v-for="message in messages.data" :key="message.id" class="shell-card p-6">
                 <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                     <div>
                         <h3 class="text-xl font-semibold">{{ message.name }}</h3>
@@ -36,6 +37,10 @@ const remove = (id) => router.delete(route('admin.contact-messages.destroy', id)
                     </div>
                 </div>
             </article>
+
+            <div class="shell-card">
+                <Pagination :links="messages.links" />
+            </div>
         </section>
     </AdminLayout>
 </template>

@@ -1,10 +1,11 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
+import Pagination from '@/Components/Pagination.vue';
 import { formatDateTime } from '@/composables/useFormatters';
 import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
-    registrations: Array,
+    registrations: Object,
     statuses: Array,
 });
 
@@ -30,7 +31,7 @@ const remove = (id) => router.delete(route('admin.event-registrations.destroy', 
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100">
-                    <tr v-for="registration in registrations" :key="registration.id">
+                    <tr v-for="registration in registrations.data" :key="registration.id">
                         <td class="px-5 py-4">
                             <p class="font-medium text-slate-900">{{ registration.full_name }}</p>
                             <p class="text-slate-500">{{ registration.email }}</p>
@@ -49,6 +50,7 @@ const remove = (id) => router.delete(route('admin.event-registrations.destroy', 
                     </tr>
                 </tbody>
             </table>
+            <Pagination :links="registrations.links" />
         </section>
     </AdminLayout>
 </template>

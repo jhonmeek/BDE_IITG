@@ -17,8 +17,9 @@ class ContactMessageController extends Controller
         return Inertia::render('Admin/ContactMessages/Index', [
             'messages' => ContactMessage::query()
                 ->latest()
-                ->get()
-                ->map(fn (ContactMessage $message) => [
+                ->paginate(25)
+                ->withQueryString()
+                ->through(fn (ContactMessage $message) => [
                     'id' => $message->id,
                     'name' => $message->name,
                     'email' => $message->email,

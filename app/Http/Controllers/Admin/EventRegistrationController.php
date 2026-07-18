@@ -17,8 +17,9 @@ class EventRegistrationController extends Controller
             'registrations' => EventRegistration::query()
                 ->with('event')
                 ->latest()
-                ->get()
-                ->map(fn (EventRegistration $registration) => [
+                ->paginate(25)
+                ->withQueryString()
+                ->through(fn (EventRegistration $registration) => [
                     'id' => $registration->id,
                     'event_name' => $registration->event?->name,
                     'full_name' => $registration->full_name,
