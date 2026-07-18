@@ -139,7 +139,7 @@ class PublicSiteController extends Controller
                 'id' => $document->id,
                 'title' => $document->title,
                 'category' => $document->category,
-                'download_url' => Storage::url($document->file_path),
+                'download_url' => route('documents.download', $document),
             ]),
         ]);
     }

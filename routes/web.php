@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\EventRegistrationController;
 use App\Http\Controllers\Admin\HistoricalEntryController;
 use App\Http\Controllers\Admin\MediaAssetController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\DocumentDownloadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicSiteController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ Route::get('/historique', [PublicSiteController::class, 'history'])->name('histo
 Route::get('/media', [PublicSiteController::class, 'media'])->name('media.index');
 Route::get('/contact', [PublicSiteController::class, 'contact'])->name('contact');
 Route::post('/contact', [PublicSiteController::class, 'storeContact'])->name('contact.store');
+Route::get('/documents/{document}/download', DocumentDownloadController::class)->name('documents.download');
 
 Route::get('/dashboard', fn () => to_route('admin.dashboard'))
     ->middleware(['auth', 'role:super_admin|membre_bde'])
@@ -48,6 +50,7 @@ Route::prefix('admin')
         Route::resource('club-registrations', ClubRegistrationController::class)->only(['index', 'update', 'destroy']);
         Route::resource('events', EventController::class)->except(['create', 'show']);
         Route::resource('event-registrations', EventRegistrationController::class)->only(['index', 'update', 'destroy']);
+        Route::get('transactions/attachments/{attachment}/download', [TransactionController::class, 'downloadAttachment'])->name('transactions.attachments.download');
         Route::resource('transactions', TransactionController::class)->except(['create', 'show']);
         Route::resource('documents', DocumentController::class)->except(['create', 'show']);
         Route::resource('historical-entries', HistoricalEntryController::class)->except(['create', 'show']);

@@ -7,30 +7,30 @@ use Illuminate\Support\Facades\Storage;
 
 trait HandlesUploads
 {
-    protected function storeUpload(?UploadedFile $file, string $directory): ?string
+    protected function storeUpload(?UploadedFile $file, string $directory, string $disk = 'public'): ?string
     {
         if (! $file) {
             return null;
         }
 
-        return $file->store($directory, 'public');
+        return $file->store($directory, $disk);
     }
 
-    protected function replaceUpload(?UploadedFile $file, ?string $currentPath, string $directory): ?string
+    protected function replaceUpload(?UploadedFile $file, ?string $currentPath, string $directory, string $disk = 'public'): ?string
     {
         if (! $file) {
             return $currentPath;
         }
 
-        $this->deleteUpload($currentPath);
+        $this->deleteUpload($currentPath, $disk);
 
-        return $this->storeUpload($file, $directory);
+        return $this->storeUpload($file, $directory, $disk);
     }
 
-    protected function deleteUpload(?string $path): void
+    protected function deleteUpload(?string $path, string $disk = 'public'): void
     {
-        if ($path && Storage::disk('public')->exists($path)) {
-            Storage::disk('public')->delete($path);
+        if ($path && Storage::disk($disk)->exists($path)) {
+            Storage::disk($disk)->delete($path);
         }
     }
 }

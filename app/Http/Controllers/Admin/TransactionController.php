@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class TransactionController extends Controller
 {
@@ -38,7 +39,7 @@ class TransactionController extends Controller
         $transaction = Transaction::create($data);
 
         if ($request->file('attachment')) {
-            $path = $this->storeUpload($request->file('attachment'), 'transactions');
+            $path = $this->storeUpload($request->file('attachment'), 'transactions', 'local');
             TransactionAttachment::create([
                 'transaction_id' => $transaction->id,
                 'original_name' => $request->file('attachment')->getClientOriginalName(),
@@ -65,11 +66,11 @@ class TransactionController extends Controller
 
         if ($request->file('attachment')) {
             foreach ($transaction->attachments as $attachment) {
-                $this->deleteUpload($attachment->file_path);
+                $this->deleteUpload($attachment->file_path, 'local');
                 $attachment->delete();
             }
 
-            $path = $this->storeUpload($request->file('attachment'), 'transactions');
+            $path = $this->storeUpload($request->file('attachment'), 'transactions', 'local');
             TransactionAttachment::create([
                 'transaction_id' => $transaction->id,
                 'original_name' => $request->file('attachment')->getClientOriginalName(),
@@ -80,10 +81,17 @@ class TransactionController extends Controller
         return to_route('admin.transactions.index')->with('success', 'Transaction mise a jour.');
     }
 
+    public function downloadAttachment(TransactionAttachment $attachment): StreamedResponse
+    {
+        abort_unless(Storage::disk('local')->exists($attachment->file_path), 404);
+
+        return Storage::disk('local')->download($attachment->file_path, $attachment->original_name);
+    }
+
     public function destroy(Transaction $transaction): RedirectResponse
     {
         foreach ($transaction->attachments as $attachment) {
-            $this->deleteUpload($attachment->file_path);
+            $this->deleteUpload($attachment->file_path, 'local');
         }
 
         $transaction->delete();
@@ -105,7 +113,7 @@ class TransactionController extends Controller
             'attachments' => $transaction->attachments->map(fn (TransactionAttachment $attachment) => [
                 'id' => $attachment->id,
                 'original_name' => $attachment->original_name,
-                'download_url' => Storage::url($attachment->file_path),
+                'download_url' => route('admin.transactions.attachments.download', $attachment),
             ])->values(),
         ];
     }

@@ -8,7 +8,6 @@ use App\Http\Requests\StoreDocumentRequest;
 use App\Http\Requests\UpdateDocumentRequest;
 use App\Models\Document;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -30,7 +29,7 @@ class DocumentController extends Controller
 
     public function store(StoreDocumentRequest $request): RedirectResponse
     {
-        $path = $this->storeUpload($request->file('file'), 'documents');
+        $path = $this->storeUpload($request->file('file'), 'documents', 'local');
 
         Document::create([
             'title' => $request->string('title'),
@@ -58,7 +57,7 @@ class DocumentController extends Controller
         $file = $request->file('file');
 
         if ($file) {
-            $data['file_path'] = $this->replaceUpload($file, $document->file_path, 'documents');
+            $data['file_path'] = $this->replaceUpload($file, $document->file_path, 'documents', 'local');
             $data['original_name'] = $file->getClientOriginalName();
         }
 
@@ -71,7 +70,7 @@ class DocumentController extends Controller
 
     public function destroy(Document $document): RedirectResponse
     {
-        $this->deleteUpload($document->file_path);
+        $this->deleteUpload($document->file_path, 'local');
         $document->delete();
 
         return back()->with('success', 'Document supprime.');
@@ -85,7 +84,7 @@ class DocumentController extends Controller
             'category' => $document->category,
             'original_name' => $document->original_name,
             'is_public' => $document->is_public,
-            'download_url' => Storage::url($document->file_path),
+            'download_url' => route('documents.download', $document),
             'author' => $document->author?->name,
             'created_at' => $document->created_at?->toIso8601String(),
         ];
