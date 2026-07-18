@@ -54,8 +54,10 @@ Route::prefix('admin')
         Route::resource('club-registrations', ClubRegistrationController::class)->only(['index', 'update', 'destroy']);
         Route::resource('events', EventController::class)->except(['create', 'show']);
         Route::resource('event-registrations', EventRegistrationController::class)->only(['index', 'update', 'destroy']);
-        Route::get('transactions/attachments/{attachment}/download', [TransactionController::class, 'downloadAttachment'])->name('transactions.attachments.download');
-        Route::resource('transactions', TransactionController::class)->except(['create', 'show']);
+        Route::middleware('permission:manage transactions')->group(function (): void {
+            Route::get('transactions/attachments/{attachment}/download', [TransactionController::class, 'downloadAttachment'])->name('transactions.attachments.download');
+            Route::resource('transactions', TransactionController::class)->except(['create', 'show']);
+        });
         Route::resource('documents', DocumentController::class)->except(['create', 'show']);
         Route::resource('historical-entries', HistoricalEntryController::class)->except(['create', 'show']);
         Route::resource('media-assets', MediaAssetController::class)->except(['create', 'show']);

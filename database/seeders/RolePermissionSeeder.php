@@ -32,7 +32,7 @@ class RolePermissionSeeder extends Seeder
         $member = Role::findOrCreate('membre_bde', 'web');
 
         $superAdmin->syncPermissions(self::PERMISSIONS);
-        $member->syncPermissions(self::PERMISSIONS);
+        $member->syncPermissions(array_values(array_diff(self::PERMISSIONS, ['manage transactions'])));
 
         app(PermissionRegistrar::class)->forgetCachedPermissions();
     }

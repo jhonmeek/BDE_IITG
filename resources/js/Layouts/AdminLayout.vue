@@ -19,13 +19,15 @@ const links = computed(() => [
     { label: 'Inscriptions clubs', href: route('admin.club-registrations.index'), active: route().current('admin.club-registrations.*') },
     { label: 'Evenements', href: route('admin.events.index'), active: route().current('admin.events.*') },
     { label: 'Inscriptions evenements', href: route('admin.event-registrations.index'), active: route().current('admin.event-registrations.*') },
-    { label: 'Tresorerie', href: route('admin.transactions.index'), active: route().current('admin.transactions.*') },
     { label: 'Documents', href: route('admin.documents.index'), active: route().current('admin.documents.*') },
     { label: 'Historique', href: route('admin.historical-entries.index'), active: route().current('admin.historical-entries.*') },
     { label: 'Medias', href: route('admin.media-assets.index'), active: route().current('admin.media-assets.*') },
     { label: 'Messages', href: route('admin.contact-messages.index'), active: route().current('admin.contact-messages.*') },
     ...(isSuperAdmin.value
-        ? [{ label: 'Comptes', href: route('admin.users.index'), active: route().current('admin.users.*') }]
+        ? [
+              { label: 'Tresorerie', href: route('admin.transactions.index'), active: route().current('admin.transactions.*') },
+              { label: 'Comptes', href: route('admin.users.index'), active: route().current('admin.users.*') },
+          ]
         : []),
 ]);
 </script>
