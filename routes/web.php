@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\EventRegistrationController;
 use App\Http\Controllers\Admin\HistoricalEntryController;
 use App\Http\Controllers\Admin\MediaAssetController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DocumentDownloadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicSiteController;
@@ -45,6 +46,9 @@ Route::prefix('admin')
     ->middleware(['auth', 'role:super_admin|membre_bde'])
     ->group(function (): void {
         Route::get('/', DashboardController::class)->name('dashboard');
+        Route::middleware('role:super_admin')->group(function (): void {
+            Route::resource('users', UserController::class)->only(['index', 'store', 'update', 'destroy']);
+        });
         Route::resource('bureau-members', BureauMemberController::class)->except(['create', 'show']);
         Route::resource('clubs', ClubController::class)->except(['create', 'show']);
         Route::resource('club-registrations', ClubRegistrationController::class)->only(['index', 'update', 'destroy']);

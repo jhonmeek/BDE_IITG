@@ -10,7 +10,9 @@ defineProps({
 const page = usePage();
 const user = computed(() => page.props.auth?.user);
 
-const links = [
+const isSuperAdmin = computed(() => (user.value?.roles ?? []).some((role) => role.name === 'super_admin'));
+
+const links = computed(() => [
     { label: 'Tableau de bord', href: route('admin.dashboard'), active: route().current('admin.dashboard') },
     { label: 'Membres', href: route('admin.bureau-members.index'), active: route().current('admin.bureau-members.*') },
     { label: 'Clubs', href: route('admin.clubs.index'), active: route().current('admin.clubs.*') },
@@ -22,7 +24,10 @@ const links = [
     { label: 'Historique', href: route('admin.historical-entries.index'), active: route().current('admin.historical-entries.*') },
     { label: 'Medias', href: route('admin.media-assets.index'), active: route().current('admin.media-assets.*') },
     { label: 'Messages', href: route('admin.contact-messages.index'), active: route().current('admin.contact-messages.*') },
-];
+    ...(isSuperAdmin.value
+        ? [{ label: 'Comptes', href: route('admin.users.index'), active: route().current('admin.users.*') }]
+        : []),
+]);
 </script>
 
 <template>
