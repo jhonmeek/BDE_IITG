@@ -20,14 +20,14 @@ Route::get('/', [PublicSiteController::class, 'home'])->name('home');
 Route::get('/bureau', [PublicSiteController::class, 'bureau'])->name('bureau');
 Route::get('/clubs', [PublicSiteController::class, 'clubs'])->name('clubs.index');
 Route::get('/clubs/{club:slug}', [PublicSiteController::class, 'clubShow'])->name('clubs.show');
-Route::post('/clubs/register', [PublicSiteController::class, 'registerClub'])->name('clubs.register');
+Route::post('/clubs/register', [PublicSiteController::class, 'registerClub'])->middleware('throttle:5,1')->name('clubs.register');
 Route::get('/events', [PublicSiteController::class, 'events'])->name('events.index');
 Route::get('/events/{event:slug}', [PublicSiteController::class, 'eventShow'])->name('events.show');
-Route::post('/events/{event:slug}/register', [PublicSiteController::class, 'registerEvent'])->name('events.register');
+Route::post('/events/{event:slug}/register', [PublicSiteController::class, 'registerEvent'])->middleware('throttle:5,1')->name('events.register');
 Route::get('/historique', [PublicSiteController::class, 'history'])->name('history');
 Route::get('/media', [PublicSiteController::class, 'media'])->name('media.index');
 Route::get('/contact', [PublicSiteController::class, 'contact'])->name('contact');
-Route::post('/contact', [PublicSiteController::class, 'storeContact'])->name('contact.store');
+Route::post('/contact', [PublicSiteController::class, 'storeContact'])->middleware('throttle:5,1')->name('contact.store');
 Route::get('/documents/{document}/download', DocumentDownloadController::class)->name('documents.download');
 
 Route::get('/dashboard', fn () => to_route('admin.dashboard'))
