@@ -1,0 +1,158 @@
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --bde-gold: #d79a0d;
+        --bde-gold-deep: #b77f08;
+        --bde-blue: #070d82;
+        --bde-red: #a71207;
+        --bde-green: #2de30d;
+        --bde-cyan: #00aaff;
+        --bde-ivory: #fff8ec;
+    }
+
+    html {
+        font-family: 'Inter', sans-serif;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply text-slate-900 antialiased;
+        background:
+            radial-gradient(circle at top left, rgba(215, 154, 13, 0.18), transparent 28%),
+            radial-gradient(circle at top right, rgba(7, 13, 130, 0.14), transparent 26%),
+            linear-gradient(180deg, #fffdf8 0%, #fff6e1 36%, #f6f7ff 100%);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        @apply tracking-tight;
+        color: var(--bde-blue);
+    }
+
+    a {
+        @apply transition;
+    }
+}
+
+@layer components {
+    .shell-card {
+        @apply rounded-[2rem] border bg-white/90 shadow-[0_24px_70px_-42px_rgba(7,13,130,0.45)] backdrop-blur;
+        border-color: rgba(215, 154, 13, 0.28);
+    }
+
+    .section-title {
+        @apply text-3xl font-semibold sm:text-4xl;
+    }
+
+    .section-copy {
+        @apply max-w-3xl text-base leading-7 text-slate-600;
+    }
+
+    .btn-primary {
+        @apply inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2;
+        background: linear-gradient(135deg, var(--bde-blue), #1022be);
+        box-shadow: 0 16px 36px -24px rgba(7, 13, 130, 0.9);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 20px 40px -24px rgba(7, 13, 130, 0.95);
+    }
+
+    .btn-secondary {
+        @apply inline-flex items-center justify-center rounded-full border bg-white/90 px-5 py-3 text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-offset-2;
+        border-color: rgba(215, 154, 13, 0.55);
+        color: var(--bde-red);
+    }
+
+    .btn-secondary:hover {
+        border-color: var(--bde-green);
+        color: var(--bde-green);
+        background: rgba(255, 255, 255, 0.98);
+    }
+
+    .input-shell {
+        @apply mt-1 w-full rounded-2xl border bg-white px-4 py-3 text-sm text-slate-900 shadow-sm;
+        border-color: rgba(7, 13, 130, 0.12);
+    }
+
+    .input-shell:focus {
+        border-color: rgba(215, 154, 13, 0.9);
+        box-shadow: 0 0 0 3px rgba(215, 154, 13, 0.16);
+        outline: none;
+    }
+
+    .badge-soft {
+        @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em];
+        background: rgba(215, 154, 13, 0.16);
+        color: var(--bde-red);
+    }
+
+    .admin-link {
+        @apply flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-medium text-slate-600 transition hover:bg-slate-900 hover:text-white;
+    }
+
+    .admin-link.active {
+        @apply bg-slate-900 text-white;
+    }
+
+    .site-topbar {
+        background: var(--bde-gold);
+        color: white;
+    }
+
+    .site-topbar a {
+        color: white;
+    }
+
+    .site-nav-link {
+        @apply rounded-full px-4 py-2 text-sm font-semibold;
+        color: var(--bde-red);
+    }
+
+    .site-nav-link:hover {
+        color: var(--bde-green);
+        background: rgba(45, 227, 13, 0.08);
+    }
+
+    .hero-panel {
+        background:
+            linear-gradient(135deg, rgba(7, 13, 130, 0.94), rgba(19, 31, 163, 0.88)),
+            linear-gradient(180deg, rgba(215, 154, 13, 0.25), rgba(215, 154, 13, 0));
+        color: white;
+    }
+
+    .legacy-photo-frame {
+        @apply overflow-hidden rounded-[1.75rem] border bg-white;
+        border-color: rgba(255, 255, 255, 0.28);
+        box-shadow: 0 20px 48px -30px rgba(7, 13, 130, 0.9);
+    }
+
+    .legacy-grid-image {
+        @apply h-full w-full object-cover;
+    }
+
+    .site-footer {
+        background: var(--bde-blue);
+        color: #dbeafe;
+    }
+
+    .site-footer h3,
+    .site-footer h4 {
+        color: var(--bde-cyan);
+    }
+
+    .site-footer a:hover {
+        color: white;
+    }
+}

@@ -1,0 +1,311 @@
+/* assets/css/style.css */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.site-header {
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 2px 8px rgb(245, 243, 242);
+  background: #ffffff;
+}
+
+/* 🔝 Top bar */
+.top-bar {
+  background-color: #070d82;
+  color: #20a60e;
+  padding: 6px 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.top-bar .right a {
+  color: #fff;
+  margin-left: 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.top-bar .btn-login {
+  background-color: #28a733;
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 5px;
+}
+
+/* 🧭 Main bar */
+.main-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 30px;
+  background-color: #ffffff;
+}
+
+.logo-title {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 70px;
+  margin-right: 15px;
+}
+
+.logo-title h1 {
+  font-size: 1.5rem;
+  color: #102542;
+}
+
+.navbar a {
+  margin: 0 12px;
+  text-decoration: none;
+  color: #102542;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.navbar a:hover {
+  color: #977704;
+}
+
+
+.video-carousel {
+  position: relative;
+  height: 70vh;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1%;
+}
+
+.overlay {
+  position: absolute;
+  top: 30%;
+  left: 10%;
+  color: rgb(215, 159, 7);
+  z-index: 2;
+  text-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
+
+.overlay h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.overlay p {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  background: #02244d;
+  color: rgb(245, 243, 243);
+  padding: 12px 25px;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #0077cc;
+}
+
+.controls {
+  position: absolute;
+  width: 100%;
+  bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 3;
+}
+
+.controls button {
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.about{
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+
+
+.footer {
+  background-color: #070d82;
+  color: #fff;
+  padding: 40px 0 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 2rem;
+  padding: 0 5%;
+}
+
+.footer-section {
+  flex: 1 1 220px;
+}
+
+.footer-section h3, .footer-section h4 {
+  color: #00aaff;
+  margin-bottom: 15px;
+}
+
+.footer-section p, .footer-section ul li a {
+  color: #ccc;
+  font-size: 14px;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+  color: #00aaff;
+}
+
+.social-icons a {
+  margin-right: 10px;
+}
+
+.social-icons img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(1.5);
+  transition: transform 0.2s;
+}
+.footer-contact-info p img{
+  width: 4%;
+  height: 4%;
+}
+.social-icons img:hover {
+  transform: scale(1.2);
+}
+
+.footer-bottom {
+  border-top: 1px solid #333;
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 15px;
+  font-size: 13px;
+  color: #888;
+}
+
+.footer-bottom a {
+  color: #aaa;
+  margin: 0 5px;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+/* MEMBRES DU BUREAU */
+
+.exécutive-board {
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+  margin-bottom: 10%;
+}
+
+.executive-board h2 {
+  font-size: 2.5em;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.board-members {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+.board-members-head{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 70px;
+  margin-bottom: 3%;
+}
+
+.member-card, .president-card{
+  background-color: #445fe31c;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 250px;
+  transition: transform 0.3s;
+}
+
+
+.member-card, .president-card:hover {
+  transform: translateY(-5px);
+}
+
+.member-card img, .president-card img {
+  width: 100%;
+  border-radius: 50% 50%;
+  margin-bottom: 15px;
+}
+
+.member-card h3, .president-card h3 {
+  margin: 10px 0 5px;
+  color: #059eeb;
+}
+
+.member-card p, .president-card p {
+  margin: 0 0 10px;
+  color: #555;
+}
+
+.member-card a, .president-card a {
+  color: #442d03;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.member-card a, .president-card a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,14 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f8f9fa;
+}
+
+.card-title {
+  color: #1a237e;
+  text-transform: uppercase;
+}
+
+.btn-outline-primary:hover {
+  background-color: #1a237e;
+  color: white;
+}

@@ -1,0 +1,300 @@
+/* assets/css/style.css */
+body {
+  background-color: #ffffff;
+  color: #1e293b;
+  transition: all 0.3s ease;
+
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f8f9fa;
+
+}
+
+/*  THÈME SOMBRE */
+body.theme-dark {
+  background-color: #0f172a;
+  color: #f1f5f9;
+}
+
+/* THÈME BLEU BDE */
+body.theme-blue {
+  background-color: #1e40af;
+  color: #ffffff;
+}
+
+/* Adapter les composants Bootstrap */
+body.theme-dark .card,
+body.theme-blue .card {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+
+
+
+/* /////THEMES////// */
+
+/* 🎨 Thèmes */
+body.theme-dark {
+  background-color: #1e293b;
+  color: white;
+}
+
+body.theme-blue {
+  background-color: #010d4e;
+  color: white;
+}
+
+/* 📍 Bouton flottant */
+.floating-btn {
+  position: fixed;
+  background-color: #27cccc39;
+  border-color: #a73728;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+}
+
+.theme-options {
+  background-color: #73edeb21;
+  display: none;
+  border-radius: 30% 30%;
+  flex-direction: column;
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  z-index: 998;
+}
+
+.theme-options button {
+  margin-bottom: 5px;
+  width: 50px;
+  border-radius: 100px 100px;
+  border-style: hidden;
+}
+
+/* NOTRE NAVBAR */
+
+.navbar a {
+  margin: 0 12px;
+  text-decoration: none;
+  color: #a71207;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.navbar a:hover {
+  color: #2de30d;
+}
+/* TOP NAVBAR */
+.lang a{
+  text-decoration: none;
+  color: #fbf8f7;
+}
+.lang{
+  text-align: right;
+
+}
+
+
+/* NOTRE CAROUSEL */
+.hero-carousel {
+  position: relative;
+  height: 60vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.carousel-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  filter: blur(1px) brightness(0.7);
+  /* flou + obscurci */
+}
+
+.carousel-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+}
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-content {
+  z-index: 2;
+  position: relative;
+  padding: 1rem 2rem;
+}
+
+.cta-btn {
+  background: #2563eb;
+  color: white;
+  padding: 0.8rem 1.6rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 1rem;
+  display: inline-block;
+}
+
+
+
+
+
+/* LE BUREAU EN QQ MOTS */
+.aboutbde {
+  background-color: #dae9ea6b;
+  margin-top: 2%;
+  box-sizing: border-box;
+  padding: 5%;
+  text-align: justify;
+
+}
+
+.aboutbde h2 {
+  margin-bottom: 1%;
+  font-weight: 400;
+}
+
+/* NOTRE EQUIPE */
+.col p:hover {
+  color: rgb(13, 188, 194);
+}
+
+.card-body:hover {
+  background-color: #140144fd;
+  color: #fbfbfc;
+}
+
+.col:hover {
+  transform: scale(1.08);
+  transition: 0.5s;
+  background-color: #11e4ef39;
+  border-radius: 10%;
+}
+.tooltip-inner {
+  max-width: 280px; /* ou 300px si nécessaire */
+  font-size: 14px;
+  text-align: center;
+}
+
+/* GRILLE */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.footer {
+  background-color: #070d82;
+  color: #fff;
+  padding: 40px 0 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 2rem;
+  padding: 0 5%;
+}
+
+.footer-section {
+  flex: 1 1 220px;
+}
+
+.footer-section h3,
+.footer-section h4 {
+  color: #00aaff;
+  margin-bottom: 15px;
+}
+
+.footer-section p,
+.footer-section ul li a {
+  color: #ccc;
+  font-size: 14px;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+  color: #00aaff;
+}
+
+.social-icons a {
+  margin-right: 10px;
+}
+
+.social-icons img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(1.5);
+  transition: transform 0.2s;
+}
+
+.footer-contact-info p img {
+  width: 4%;
+  height: 4%;
+}
+
+.social-icons img:hover {
+  transform: scale(1.2);
+}
+
+.footer-bottom {
+  border-top: 1px solid #333;
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 15px;
+  font-size: 13px;
+  color: #888;
+}
+
+.footer-bottom a {
+  color: #aaa;
+  margin: 0 5px;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}

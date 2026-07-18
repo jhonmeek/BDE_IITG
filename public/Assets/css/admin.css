@@ -1,0 +1,24 @@
+    body { background: #03818542; }
+    .sidebar {
+      position: fixed; top: 0; left: 0; height: 100%; width: 240px;
+      background: #260c7b; color: #fff; z-index: 1001;
+      transition: left 0.2s; }
+    .sidebar .nav-link { color: #fff; }
+    .sidebar .nav-link.active, .sidebar .nav-link:hover { background: #122142; }
+    .main-content { margin-left: 240px; transition: margin-left 0.2s; }
+    .stat-card { background: #e4d5c1; border-radius: 15px; box-shadow: 0 2px 8px rgba(254, 252, 252, 0.993); }
+    .stat-card i { font-size: 2rem; color: #2564cf; }
+    .sidebar-toggle { position: fixed; top: 16px; left: 16px; z-index: 1100; }
+    @media (max-width: 768px) {
+      .sidebar { left: -240px; }
+      .sidebar.active { left: 0; }
+      .main-content { margin-left: 0; }
+    }
+    .event-card { background: #e8f1fa; border-radius: 10px; padding: 10px 15px; }
+    .event-card:hover { background: #e3bf1bf8; }
+    .event-date { width: 46px; text-align: center; font-weight: bold; }
+    .event-day { font-size: 1.5rem; }
+    .event-month { font-size: 1rem; color: #2564cf; }
+    .page { display: none; }
+    .page.active { display: block; }
+    .progress { height: 8px; }
