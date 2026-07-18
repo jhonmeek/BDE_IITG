@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreClubRegistrationRequest extends FormRequest
 {
@@ -29,7 +30,7 @@ class StoreClubRegistrationRequest extends FormRequest
             'phone' => ['nullable', 'string', 'max:255'],
             'class_name' => ['required', 'string', 'max:255'],
             'club_ids' => ['required', 'array', 'min:1'],
-            'club_ids.*' => ['exists:clubs,id'],
+            'club_ids.*' => [Rule::exists('clubs', 'id')->where('is_published', true)],
             'notes' => ['nullable', 'string'],
         ];
     }

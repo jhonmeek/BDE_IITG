@@ -16,6 +16,7 @@ use App\Models\HistoricalEntry;
 use App\Models\MediaAsset;
 use App\Models\SiteSetting;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -155,18 +156,24 @@ class PublicSiteController extends Controller
     {
         $data = $request->validated();
 
-        foreach ($data['club_ids'] as $clubId) {
-            ClubRegistration::create([
-                'club_id' => $clubId,
-                'last_name' => $data['last_name'],
-                'first_name' => $data['first_name'],
-                'email' => $data['email'] ?? null,
-                'phone' => $data['phone'] ?? null,
-                'class_name' => $data['class_name'],
-                'notes' => $data['notes'] ?? null,
-                'status' => 'pending',
-            ]);
-        }
+        DB::transaction(function () use ($data): void {
+            foreach ($data['club_ids'] as $clubId) {
+                ClubRegistration::firstOrCreate(
+                    [
+                        'club_id' => $clubId,
+                        'email' => $data['email'] ?? null,
+                        'first_name' => $data['first_name'],
+                        'last_name' => $data['last_name'],
+                    ],
+                    [
+                        'phone' => $data['phone'] ?? null,
+                        'class_name' => $data['class_name'],
+                        'notes' => $data['notes'] ?? null,
+                        'status' => 'pending',
+                    ],
+                );
+            }
+        });
 
         return back()->with('success', 'Votre demande d inscription aux clubs a ete enregistree.');
     }
