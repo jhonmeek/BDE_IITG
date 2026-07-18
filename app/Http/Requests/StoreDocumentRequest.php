@@ -25,7 +25,7 @@ class StoreDocumentRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'category' => ['required', 'string', 'max:255'],
-            'file' => ['required', 'file', 'max:10240'],
+            'file' => ['required', 'file', 'mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,png,jpg,jpeg', 'max:10240'],
             'is_public' => ['nullable', 'boolean'],
         ];
     }

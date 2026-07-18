@@ -29,7 +29,7 @@ class StoreTransactionRequest extends FormRequest
             'description' => ['required', 'string', 'max:255'],
             'transaction_date' => ['required', 'date'],
             'notes' => ['nullable', 'string'],
-            'attachment' => ['nullable', 'file', 'max:5120'],
+            'attachment' => ['nullable', 'file', 'mimes:pdf,png,jpg,jpeg', 'max:5120'],
         ];
     }
 }

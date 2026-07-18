@@ -30,7 +30,7 @@ class StoreMediaAssetRequest extends FormRequest
             'external_url' => ['nullable', 'url'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
             'is_published' => ['nullable', 'boolean'],
-            'file' => ['nullable', 'file', 'max:51200'],
+            'file' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp,gif,mp4,webm', 'max:51200'],
         ];
     }
 }
