@@ -111,6 +111,12 @@ class DemoContentSeeder extends Seeder
             ['title' => 'Vie sportive IITG', 'file' => 'legacy/media/sport-iitg-5198b458.jpg', 'caption' => 'Les activites sportives du campus.'],
             ['title' => 'Debat inter-etudiants', 'file' => 'legacy/media/debat-bde-presi-5642d602.jpg', 'caption' => 'Les joutes oratoires organisees par le bureau.'],
             ['title' => 'Moments de convivialite', 'file' => 'legacy/media/cocot-tables-1e3e9707.jpg', 'caption' => 'Les rencontres et repas partages du BDE.'],
+            ['title' => 'Le bureau reuni', 'file' => 'legacy/media/bde-untd.jpg', 'caption' => 'L equipe du BDE rassemblee.'],
+            ['title' => 'Rencontres sportives', 'file' => 'legacy/media/bdr-sport2.jpg', 'caption' => 'Les tournois et rencontres inter-classes.'],
+            ['title' => 'Integration des nouveaux', 'file' => 'legacy/media/intre-day2.jpg', 'caption' => 'Un autre regard sur la journee d integration.'],
+            ['title' => 'Esprit d equipe', 'file' => 'legacy/media/sprt-bdr.jpg', 'caption' => 'Le sport comme lien entre etudiants.'],
+            ['title' => 'Autour de la table', 'file' => 'legacy/media/tbl-sbg.jpg', 'caption' => 'Les moments d echange de la communaute.'],
+            ['title' => 'Salle de classe IITG', 'file' => 'legacy/media/iitg-classroom.jpg', 'caption' => 'Le cadre d etude au quotidien.'],
         ];
 
         foreach ($galleryItems as $index => $item) {
