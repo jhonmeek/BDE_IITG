@@ -35,13 +35,13 @@ const submit = () => {
 
         <div class="mb-6">
             <p class="eyebrow">Accès interne</p>
-            <h2 class="page-title section-title--rule mt-2 text-slate-950">Se connecter</h2>
+            <h2 class="page-title section-title--rule mt-2">Se connecter</h2>
             <p class="mt-2 text-sm leading-6 text-slate-500">
                 Utilisez votre identifiant membre ou votre e-mail pour accéder au tableau de bord du bureau.
             </p>
         </div>
 
-        <div v-if="status" class="mb-4 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-800">
+        <div v-if="status" class="mb-4 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-800">
             {{ status }}
         </div>
 
@@ -82,13 +82,13 @@ const submit = () => {
                 <Link
                     v-if="canResetPassword"
                     :href="route('password.request')"
-                    class="text-sm font-medium text-amber-700 underline underline-offset-4 hover:text-amber-800"
+                    class="text-accent text-sm font-medium underline underline-offset-4"
                 >
                     Mot de passe oublié ?
                 </Link>
             </div>
 
-            <PrimaryButton class="w-full justify-center" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <PrimaryButton class="w-full justify-center" :disabled="form.processing">
                 Se connecter
             </PrimaryButton>
         </form>

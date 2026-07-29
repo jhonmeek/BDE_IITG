@@ -34,9 +34,19 @@
         -webkit-text-size-adjust: 100%;
     }
 
+    /* Garde-fou global : toute l'animation retombe à zéro pour qui a
+       désactivé les effets de mouvement au niveau du système. */
     @media (prefers-reduced-motion: reduce) {
         html {
             scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
         }
     }
 
@@ -63,6 +73,32 @@
 @layer components {
     .shell-card {
         @apply rounded-xl border border-stone-200 bg-white shadow-sm;
+        transition: box-shadow 200ms ease, transform 200ms ease, border-color 200ms ease;
+    }
+
+    /* ---- Motions légères : courtes, faibles amplitudes, jamais bloquantes ---- */
+
+    /* Apparition du contenu de page : 8px de montée, 220ms. */
+    .page-enter {
+        animation: page-enter 220ms ease-out both;
+    }
+
+    @keyframes page-enter {
+        from {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    /* Enfoncement au clic sur les boutons. */
+    .btn-primary:active:not(:disabled),
+    .btn-secondary:active:not(:disabled),
+    .btn-danger:active:not(:disabled) {
+        transform: translateY(1px);
     }
 
     /* Échelle typographique fluide : plus de saut brutal au breakpoint. */
@@ -217,6 +253,15 @@
         border-top: 1px solid var(--bde-line);
     }
 
+    /* Survol de ligne : le repere de lecture attendu dans un backoffice. */
+    .table-scroll tbody tr {
+        transition: background-color 140ms ease;
+    }
+
+    .table-scroll tbody tr:hover {
+        background-color: rgba(16, 21, 115, 0.04);
+    }
+
     /* Padding de carte : respire à 375px, généreux au-delà. */
     .card-pad {
         @apply p-5 sm:p-6 lg:p-8;
@@ -237,13 +282,20 @@
         border-top: 3px solid var(--bde-gold-bright);
     }
 
+    /* La grille anime sa colonne de gauche lors du repli du rail. */
+    .admin-grid {
+        transition: grid-template-columns 240ms ease;
+    }
+
     .admin-link {
-        @apply flex items-center justify-between rounded-lg px-4 py-3 text-sm font-medium text-slate-600 transition;
+        @apply flex items-center justify-between rounded-lg px-4 py-3 text-sm font-medium text-slate-600;
+        transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
     }
 
     .admin-link:hover {
         background-color: rgba(16, 21, 115, 0.07);
         color: var(--bde-blue);
+        transform: translateX(2px);
     }
 
     .admin-link.active {

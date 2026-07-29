@@ -72,7 +72,7 @@ onBeforeUnmount(() => {
 
 <template>
     <AdminLayout title="Tableau de bord">
-        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             <MetricCard label="Membres actifs" :value="stats.members" />
             <MetricCard label="Clubs" :value="stats.clubs" />
             <MetricCard label="Inscriptions clubs en attente" :value="stats.pendingClubRegistrations" />

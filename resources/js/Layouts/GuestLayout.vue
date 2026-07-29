@@ -3,9 +3,9 @@ import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <div class="flex min-h-screen items-center justify-center px-4 py-8 sm:py-10">
+    <div class="admin-shell flex min-h-screen items-center justify-center px-4 py-8 sm:py-10">
         <div class="grid w-full max-w-5xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-            <div class="shell-card card-pad flex flex-col justify-between overflow-hidden bg-slate-950 text-white">
+            <div class="brand-surface card-pad flex flex-col justify-between overflow-hidden rounded-xl shadow-sm">
                 <div>
                     <p class="eyebrow-on-dark">BDE IITG</p>
                     <h1 class="page-title mt-5 text-white">Connexion à l’espace administratif</h1>
