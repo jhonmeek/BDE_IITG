@@ -19,7 +19,7 @@ const submit = () => form.post(route('admin.documents.update', props.document.id
 
 <template>
     <AdminLayout title="Modifier un document">
-        <section class="shell-card max-w-3xl p-6">
+        <section class="shell-card card-pad max-w-3xl">
             <form class="space-y-4" @submit.prevent="submit">
                 <input v-model="form.title" type="text" class="input-shell" placeholder="Titre" />
                 <select v-model="form.category" class="input-shell">
@@ -27,10 +27,10 @@ const submit = () => form.post(route('admin.documents.update', props.document.id
                 </select>
                 <input type="file" class="input-shell" @input="form.file = $event.target.files[0]" />
                 <label class="flex items-center gap-3 text-sm text-slate-600">
-                    <input v-model="form.is_public" type="checkbox" class="rounded border-slate-300 text-amber-600" />
+                    <input v-model="form.is_public" type="checkbox" class="field-check" />
                     Rendre public
                 </label>
-                <button class="btn-primary" :disabled="form.processing">Mettre a jour</button>
+                <button class="btn-primary" :disabled="form.processing">Mettre à jour</button>
             </form>
         </section>
     </AdminLayout>

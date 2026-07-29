@@ -17,11 +17,27 @@
         --bde-red: #a71207;
         --bde-paper: #faf8f3;
         --bde-ink: #1f2937;
+        --bde-gold-line: rgba(183, 127, 8, 0.38);
+
+        /* Relevés sur le logo officiel IITG. --bde-blue / --bde-blue-dark
+           tiennent déjà le bleu du médaillon ; on complète avec l'or vif de
+           la couronne (illisible sur blanc, réservé aux fonds sombres) et
+           deux neutres bleutés dérivés du même bleu. */
+        --bde-gold-bright: #e3ab27;
+        --bde-mist: #eef1f8;
+        --bde-line: #dde2ef;
     }
 
     html {
         font-family: 'Inter', sans-serif;
         scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
     }
 
     body {
@@ -36,6 +52,7 @@
     h4 {
         @apply tracking-tight;
         color: var(--bde-blue);
+        text-wrap: balance;
     }
 
     a {
@@ -48,12 +65,71 @@
         @apply rounded-xl border border-stone-200 bg-white shadow-sm;
     }
 
+    /* Échelle typographique fluide : plus de saut brutal au breakpoint. */
+    .page-title {
+        @apply font-bold;
+        font-size: clamp(1.75rem, 1.35rem + 1.9vw, 3rem);
+        line-height: 1.12;
+    }
+
     .section-title {
-        @apply text-2xl font-bold sm:text-3xl;
+        @apply font-bold;
+        font-size: clamp(1.375rem, 1.2rem + 0.85vw, 1.875rem);
+        line-height: 1.2;
+    }
+
+    /* Filet or sous le titre : accent visuel des sections principales. */
+    .section-title--rule::after {
+        content: '';
+        @apply mt-3 block h-0.5 w-12 rounded-full;
+        background: var(--bde-gold);
     }
 
     .section-copy {
         @apply max-w-3xl text-base leading-7 text-slate-600;
+    }
+
+    .lead {
+        @apply max-w-2xl text-slate-600;
+        font-size: clamp(1rem, 0.95rem + 0.35vw, 1.125rem);
+        line-height: 1.7;
+        text-wrap: pretty;
+    }
+
+    /* Sur-titre : petites capitales espacées, couleur d'accent. */
+    .eyebrow {
+        @apply inline-block text-xs font-semibold uppercase;
+        letter-spacing: 0.22em;
+        color: var(--bde-gold-text);
+    }
+
+    .eyebrow-on-dark {
+        @apply inline-block text-xs font-semibold uppercase;
+        letter-spacing: 0.22em;
+        color: var(--bde-gold-bright);
+    }
+
+    .text-accent {
+        color: var(--bde-gold-text);
+    }
+
+    .text-brand {
+        color: var(--bde-blue);
+    }
+
+    /* Surlignage or d'un mot-clé, sans casser la ligne de base. */
+    .mark-accent {
+        background-image: linear-gradient(transparent 60%, var(--bde-gold-line) 60%);
+        color: inherit;
+    }
+
+    .link-accent {
+        @apply inline-flex items-center gap-1 text-sm font-semibold;
+        color: var(--bde-blue);
+    }
+
+    .link-accent:hover {
+        color: var(--bde-gold-text);
     }
 
     .btn-primary {
@@ -63,6 +139,32 @@
 
     .btn-primary:hover {
         background-color: var(--bde-blue-dark);
+    }
+
+    /* Anneau de focus aux couleurs de la marque : sans cela Tailwind
+       retombe sur son bleu par defaut. */
+    .btn-primary:focus,
+    .btn-secondary:focus {
+        --tw-ring-color: var(--bde-blue);
+    }
+
+    .btn-danger {
+        @apply inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2;
+        background-color: var(--bde-red);
+    }
+
+    .btn-danger:hover {
+        background-color: #8c0f06;
+    }
+
+    .btn-danger:focus {
+        --tw-ring-color: var(--bde-red);
+    }
+
+    .btn-primary:disabled,
+    .btn-secondary:disabled,
+    .btn-danger:disabled {
+        @apply cursor-not-allowed opacity-50;
     }
 
     .btn-secondary {
@@ -90,16 +192,135 @@
         color: var(--bde-gold-text);
     }
 
+    /* Les tables admin dépassent la largeur mobile : on les rend scrollables
+       plutôt que rognées par le overflow-hidden de la carte parente.
+       min-w-0 est indispensable : sans lui l'élément garde la largeur
+       min-content de la table et fait déborder toute la grille parente. */
+    .table-scroll {
+        @apply w-full min-w-0 overflow-x-auto overscroll-x-contain;
+    }
+
+    .table-scroll > table {
+        @apply min-w-full;
+    }
+
+    .table-scroll th,
+    .table-scroll td {
+        @apply whitespace-nowrap;
+    }
+
+    /* Séparateurs aux tokens IITG. Posés ici et non via `divide-*` :
+       border-color ne s'hérite pas, la couleur devait être portée par les
+       lignes elles-mêmes, pas par la table. */
+    .table-scroll tbody,
+    .table-scroll tbody tr + tr {
+        border-top: 1px solid var(--bde-line);
+    }
+
+    /* Padding de carte : respire à 375px, généreux au-delà. */
+    .card-pad {
+        @apply p-5 sm:p-6 lg:p-8;
+    }
+
+    /* ---- Espace admin : palette IITG plutôt que les gris Tailwind ---- */
+
+    .admin-shell {
+        background-color: var(--bde-mist);
+    }
+
+    /* Surface de marque : le bleu du médaillon souligné d'un filet or.
+       Partagée par le bandeau admin et le panneau de connexion — le
+       rayon et l'espacement restent à la charge de l'appelant. */
+    .brand-surface {
+        @apply text-white;
+        background-color: var(--bde-blue-dark);
+        border-top: 3px solid var(--bde-gold-bright);
+    }
+
     .admin-link {
-        @apply flex items-center justify-between rounded-lg px-4 py-3 text-sm font-medium text-slate-600 transition hover:bg-slate-900 hover:text-white;
+        @apply flex items-center justify-between rounded-lg px-4 py-3 text-sm font-medium text-slate-600 transition;
+    }
+
+    .admin-link:hover {
+        background-color: rgba(16, 21, 115, 0.07);
+        color: var(--bde-blue);
     }
 
     .admin-link.active {
-        @apply bg-slate-900 text-white;
+        background-color: var(--bde-blue);
+        @apply text-white;
+    }
+
+    .admin-panel {
+        border-color: var(--bde-line);
+        background-color: var(--bde-mist);
+    }
+
+    /* En-tête de table : teinte bleutée de la marque. */
+    .table-head {
+        @apply text-left text-xs font-semibold uppercase tracking-wider;
+        background-color: var(--bde-mist);
+        color: var(--bde-blue);
+    }
+
+    /* Actions de ligne : or pour éditer, rouge IITG pour supprimer,
+       bleu pour consulter. */
+    .action-edit {
+        @apply font-medium;
+        color: var(--bde-gold-text);
+    }
+
+    .action-delete {
+        @apply font-medium;
+        color: var(--bde-red);
+    }
+
+    .action-view {
+        @apply font-medium;
+        color: var(--bde-blue);
+    }
+
+    .action-edit:hover,
+    .action-delete:hover,
+    .action-view:hover {
+        @apply underline underline-offset-2;
+    }
+
+    .text-danger {
+        color: var(--bde-red);
+    }
+
+    .amount-in {
+        @apply font-semibold text-emerald-700;
+    }
+
+    .amount-out {
+        @apply font-semibold;
+        color: var(--bde-red);
+    }
+
+    /* Cases à cocher et selects des formulaires admin. */
+    .field-check {
+        @apply rounded border-stone-300;
+        color: var(--bde-blue);
+    }
+
+    .field-check:focus {
+        --tw-ring-color: var(--bde-blue);
+        border-color: var(--bde-blue);
+    }
+
+    .field-inline {
+        @apply rounded-lg border-stone-300 text-sm;
+    }
+
+    .field-inline:focus {
+        border-color: var(--bde-blue);
+        box-shadow: 0 0 0 3px rgba(16, 21, 115, 0.12);
     }
 
     .site-nav-link {
-        @apply rounded-lg px-3.5 py-2 text-sm font-medium text-slate-700;
+        @apply whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium text-slate-700 xl:px-3.5;
     }
 
     .site-nav-link:hover {

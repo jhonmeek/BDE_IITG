@@ -22,11 +22,11 @@ const submit = () => form.post(route('admin.transactions.update', props.transact
 
 <template>
     <AdminLayout title="Modifier une transaction">
-        <section class="shell-card max-w-3xl p-6">
+        <section class="shell-card card-pad max-w-3xl">
             <form class="space-y-4" @submit.prevent="submit">
                 <select v-model="form.type" class="input-shell">
                     <option value="income">Recette</option>
-                    <option value="expense">Depense</option>
+                    <option value="expense">Dépense</option>
                 </select>
                 <select v-model="form.category" class="input-shell">
                     <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
@@ -36,7 +36,7 @@ const submit = () => form.post(route('admin.transactions.update', props.transact
                 <input v-model="form.transaction_date" type="date" class="input-shell" />
                 <textarea v-model="form.notes" rows="5" class="input-shell" placeholder="Notes" />
                 <input type="file" class="input-shell" @input="form.attachment = $event.target.files[0]" />
-                <button class="btn-primary" :disabled="form.processing">Mettre a jour</button>
+                <button class="btn-primary" :disabled="form.processing">Mettre à jour</button>
             </form>
         </section>
     </AdminLayout>

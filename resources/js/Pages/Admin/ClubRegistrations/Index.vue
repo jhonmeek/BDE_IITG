@@ -18,11 +18,11 @@ const remove = (id) => router.delete(route('admin.club-registrations.destroy', i
 
 <template>
     <AdminLayout title="Inscriptions clubs">
-        <section class="shell-card overflow-hidden">
-            <table class="min-w-full divide-y divide-slate-200 text-sm">
-                <thead class="bg-slate-50 text-left text-slate-500">
+        <section class="shell-card table-scroll">
+            <table class="min-w-full text-sm">
+                <thead class="table-head">
                     <tr>
-                        <th class="px-5 py-4">Etudiant</th>
+                        <th class="px-5 py-4">Étudiant</th>
                         <th class="px-5 py-4">Club</th>
                         <th class="px-5 py-4">Classe</th>
                         <th class="px-5 py-4">Statut</th>
@@ -30,7 +30,7 @@ const remove = (id) => router.delete(route('admin.club-registrations.destroy', i
                         <th class="px-5 py-4"></th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-100">
+                <tbody>
                     <tr v-for="registration in registrations.data" :key="registration.id">
                         <td class="px-5 py-4">
                             <p class="font-medium text-slate-900">{{ registration.first_name }} {{ registration.last_name }}</p>
@@ -39,13 +39,13 @@ const remove = (id) => router.delete(route('admin.club-registrations.destroy', i
                         <td class="px-5 py-4">{{ registration.club_name }}</td>
                         <td class="px-5 py-4">{{ registration.class_name }}</td>
                         <td class="px-5 py-4">
-                            <select v-model="registration.status" class="rounded-xl border-slate-200 text-sm" @change="updateStatus(registration)">
+                            <select v-model="registration.status" class="field-inline" @change="updateStatus(registration)">
                                 <option v-for="status in statuses" :key="status" :value="status">{{ status }}</option>
                             </select>
                         </td>
                         <td class="px-5 py-4">{{ formatDateTime(registration.created_at) }}</td>
                         <td class="px-5 py-4 text-right">
-                            <button class="text-rose-700" @click="remove(registration.id)">Supprimer</button>
+                            <button class="action-delete" @click="remove(registration.id)">Supprimer</button>
                         </td>
                     </tr>
                 </tbody>

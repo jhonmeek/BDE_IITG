@@ -21,11 +21,12 @@ const submit = () => form.post(route('contact.store'));
 <template>
     <SiteLayout title="Contact">
         <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-            <section class="shell-card p-8">
-                <h1 class="section-title">Parler au Bureau des Etudiants</h1>
+            <section class="shell-card card-pad">
+                <p class="eyebrow">Contact</p>
+                <h1 class="page-title section-title--rule mt-2">Parler au Bureau des Étudiants</h1>
                 <div class="mt-6 space-y-4 text-sm leading-7 text-slate-600">
-                    <p><span class="font-semibold text-slate-900">Email :</span> {{ settings.contact_email }}</p>
-                    <p><span class="font-semibold text-slate-900">Telephone :</span> {{ settings.contact_phone }}</p>
+                    <p class="break-words"><span class="font-semibold text-slate-900">E-mail :</span> {{ settings.contact_email }}</p>
+                    <p><span class="font-semibold text-slate-900">Téléphone :</span> {{ settings.contact_phone }}</p>
                     <p><span class="font-semibold text-slate-900">Adresse :</span> {{ settings.contact_address }}</p>
                 </div>
 
@@ -37,17 +38,19 @@ const submit = () => form.post(route('contact.store'));
                             :key="document.id"
                             :href="document.download_url"
                             target="_blank"
-                            class="flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700"
+                            rel="noreferrer"
+                            class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 hover:border-stone-300"
                         >
-                            <span>{{ document.title }}</span>
-                            <span class="font-semibold text-amber-700">{{ document.category }}</span>
+                            <span class="min-w-0">{{ document.title }}</span>
+                            <span class="text-accent font-semibold">{{ document.category }}</span>
                         </a>
                     </div>
                 </div>
             </section>
 
-            <section class="shell-card p-8">
-                <h2 class="mt-4 text-2xl font-semibold">Envoyer un message</h2>
+            <section class="shell-card card-pad">
+                <p class="eyebrow">Formulaire</p>
+                <h2 class="section-title mt-2">Envoyer un message</h2>
                 <form class="mt-6 space-y-4" @submit.prevent="submit">
                     <div>
                         <label class="text-sm font-medium text-slate-700">Nom</label>
@@ -55,7 +58,7 @@ const submit = () => form.post(route('contact.store'));
                         <InputError class="mt-2" :message="form.errors.name" />
                     </div>
                     <div>
-                        <label class="text-sm font-medium text-slate-700">Email</label>
+                        <label class="text-sm font-medium text-slate-700">E-mail</label>
                         <input v-model="form.email" type="email" class="input-shell" />
                         <InputError class="mt-2" :message="form.errors.email" />
                     </div>

@@ -3,14 +3,14 @@ import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <div class="flex min-h-screen items-center justify-center px-4 py-10">
+    <div class="flex min-h-screen items-center justify-center px-4 py-8 sm:py-10">
         <div class="grid w-full max-w-5xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-            <div class="shell-card flex flex-col justify-between overflow-hidden bg-slate-950 p-10 text-white">
+            <div class="shell-card card-pad flex flex-col justify-between overflow-hidden bg-slate-950 text-white">
                 <div>
-                    <p class="text-sm font-semibold text-amber-200">BDE IITG</p>
-                    <h1 class="mt-6 text-4xl font-semibold text-white">Connexion a l espace administratif</h1>
-                    <p class="mt-4 max-w-lg text-base leading-7 text-slate-300">
-                        Accedez a la gestion centralisee des clubs, evenements, inscriptions, documents et de la tresorerie du bureau.
+                    <p class="eyebrow-on-dark">BDE IITG</p>
+                    <h1 class="page-title mt-5 text-white">Connexion à l’espace administratif</h1>
+                    <p class="lead mt-4 max-w-lg text-slate-300">
+                        Accédez à la gestion centralisée des clubs, événements, inscriptions, documents et de la trésorerie du bureau.
                     </p>
                 </div>
 
@@ -21,7 +21,7 @@ import { Link } from '@inertiajs/vue3';
                 </div>
             </div>
 
-            <div class="shell-card p-8 sm:p-10">
+            <div class="shell-card card-pad">
                 <slot />
             </div>
         </div>

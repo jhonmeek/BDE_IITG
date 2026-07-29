@@ -34,10 +34,10 @@ const submit = () => {
         <Head title="Connexion" />
 
         <div class="mb-6">
-            <p class="badge-soft">Acces interne</p>
-            <h2 class="mt-4 text-3xl font-semibold text-slate-950">Se connecter</h2>
+            <p class="eyebrow">Accès interne</p>
+            <h2 class="page-title section-title--rule mt-2 text-slate-950">Se connecter</h2>
             <p class="mt-2 text-sm leading-6 text-slate-500">
-                Utilisez votre identifiant membre ou votre email pour acceder au tableau de bord du bureau.
+                Utilisez votre identifiant membre ou votre e-mail pour accéder au tableau de bord du bureau.
             </p>
         </div>
 
@@ -47,7 +47,7 @@ const submit = () => {
 
         <form class="space-y-5" @submit.prevent="submit">
             <div>
-                <InputLabel for="login" value="Identifiant ou email" />
+                <InputLabel for="login" value="Identifiant ou e-mail" />
                 <TextInput
                     id="login"
                     type="text"
@@ -73,7 +73,7 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
-            <div class="flex items-center justify-between">
+            <div class="flex flex-wrap items-center justify-between gap-3">
                 <label class="flex items-center">
                     <Checkbox name="remember" v-model:checked="form.remember" />
                     <span class="ms-2 text-sm text-slate-600">Se souvenir de moi</span>
@@ -84,7 +84,7 @@ const submit = () => {
                     :href="route('password.request')"
                     class="text-sm font-medium text-amber-700 underline underline-offset-4 hover:text-amber-800"
                 >
-                    Mot de passe oublie ?
+                    Mot de passe oublié ?
                 </Link>
             </div>
 

@@ -22,16 +22,17 @@ const normalizedItems = computed(() =>
 </script>
 
 <template>
-    <SiteLayout title="Videos et medias">
+    <SiteLayout title="Vidéos et médias">
         <section class="mb-10">
-            <h1 class="section-title">Videos historiques et medias du bureau</h1>
-            <p class="section-copy mt-4">
+            <p class="eyebrow">Médiathèque</p>
+            <h1 class="page-title section-title--rule mt-2">Vidéos historiques et médias du bureau</h1>
+            <p class="lead mt-5">
                 Retrouvez les capsules, archives visuelles et moments marquants de la vie du campus.
             </p>
         </section>
 
         <div class="grid gap-6 lg:grid-cols-2">
-            <article v-for="item in normalizedItems" :key="item.id" class="shell-card p-6">
+            <article v-for="item in normalizedItems" :key="item.id" class="shell-card card-pad">
                 <div class="aspect-video overflow-hidden rounded-3xl bg-slate-100">
                     <iframe
                         v-if="item.media_type === 'video' && item.embedUrl"
@@ -54,14 +55,14 @@ const normalizedItems = computed(() =>
                         class="h-full w-full object-cover"
                     />
                     <div v-else class="flex h-full items-center justify-center p-6 text-center text-sm font-medium text-slate-500">
-                        Media disponible via un lien externe.
+                        Média disponible via un lien externe.
                     </div>
                 </div>
-                <h2 class="mt-5 text-2xl font-semibold">{{ item.title }}</h2>
-                <p class="mt-1 text-sm font-medium" style="color: var(--bde-gold-text);">{{ item.collection }}</p>
+                <h2 class="mt-5 text-xl font-semibold sm:text-2xl">{{ item.title }}</h2>
+                <p class="text-accent mt-1 text-sm font-medium">{{ item.collection }}</p>
                 <p class="mt-4 text-sm leading-6 text-slate-600">{{ item.caption }}</p>
-                <a v-if="item.url" :href="item.url" target="_blank" class="mt-4 inline-flex text-sm font-semibold" style="color: var(--bde-red);">
-                    Ouvrir le media
+                <a v-if="item.url" :href="item.url" target="_blank" rel="noreferrer" class="mt-4 inline-flex text-sm font-semibold" style="color: var(--bde-red);">
+                    Ouvrir le média
                 </a>
             </article>
         </div>

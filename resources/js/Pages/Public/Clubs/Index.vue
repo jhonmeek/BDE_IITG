@@ -25,14 +25,15 @@ const submit = () => form.post(route('clubs.register'));
 <template>
     <SiteLayout title="Clubs">
         <section class="mb-10">
-            <h1 class="section-title">Les clubs educatifs, sportifs et communautaires</h1>
-            <p class="section-copy mt-4">
-                Inscrivez-vous a un ou plusieurs clubs pour participer a la vie du campus et developper vos competences.
+            <p class="eyebrow">Vie associative</p>
+            <h1 class="page-title section-title--rule mt-2">Les clubs éducatifs, sportifs et communautaires</h1>
+            <p class="lead mt-5">
+                Inscrivez-vous à un ou plusieurs clubs pour participer à la vie du campus et <span class="mark-accent">développer vos compétences</span>.
             </p>
         </section>
 
         <div class="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-            <div class="grid gap-5 md:grid-cols-2">
+            <div class="grid gap-5 sm:grid-cols-2">
                 <article v-for="club in clubs" :key="club.id" class="shell-card p-6">
                     <img
                         v-if="club.image_url"
@@ -40,19 +41,20 @@ const submit = () => form.post(route('clubs.register'));
                         :alt="club.name"
                         class="mb-4 h-20 w-20 rounded-[1.5rem] object-cover"
                     />
-                    <p class="text-sm font-medium" style="color: var(--bde-gold-text);">{{ club.category }}</p>
-                    <h2 class="mt-3 text-2xl font-semibold">{{ club.name }}</h2>
+                    <p class="text-accent text-sm font-medium">{{ club.category }}</p>
+                    <h2 class="mt-3 text-xl font-semibold sm:text-2xl">{{ club.name }}</h2>
                     <p class="mt-2 text-sm text-slate-500">Responsable : {{ club.lead_name }}</p>
                     <p class="mt-4 text-sm leading-6 text-slate-600">{{ club.description }}</p>
-                    <div class="mt-5 flex items-center justify-between text-sm text-slate-500">
+                    <div class="mt-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-sm text-slate-500">
                         <span>Budget : {{ formatCurrency(club.budget_allocated) }}</span>
-                        <Link :href="route('clubs.show', club.slug)" class="font-semibold" style="color: var(--bde-red);">Details</Link>
+                        <Link :href="route('clubs.show', club.slug)" class="font-semibold" style="color: var(--bde-red);">Détails</Link>
                     </div>
                 </article>
             </div>
 
-            <div class="shell-card p-6 sm:p-8">
-                <h2 class="mt-4 text-2xl font-semibold">Rejoindre un ou plusieurs clubs</h2>
+            <div class="shell-card card-pad">
+                <p class="eyebrow">Adhésion</p>
+                <h2 class="section-title mt-2">Rejoindre un ou plusieurs clubs</h2>
                 <form class="mt-6 space-y-4" @submit.prevent="submit">
                     <div class="grid gap-4 sm:grid-cols-2">
                         <div>
@@ -61,7 +63,7 @@ const submit = () => form.post(route('clubs.register'));
                             <InputError class="mt-2" :message="form.errors.last_name" />
                         </div>
                         <div>
-                            <label class="text-sm font-medium text-slate-700">Prenom</label>
+                            <label class="text-sm font-medium text-slate-700">Prénom</label>
                             <input v-model="form.first_name" type="text" class="input-shell" />
                             <InputError class="mt-2" :message="form.errors.first_name" />
                         </div>
@@ -69,11 +71,11 @@ const submit = () => form.post(route('clubs.register'));
 
                     <div class="grid gap-4 sm:grid-cols-2">
                         <div>
-                            <label class="text-sm font-medium text-slate-700">Email</label>
+                            <label class="text-sm font-medium text-slate-700">E-mail</label>
                             <input v-model="form.email" type="email" class="input-shell" />
                         </div>
                         <div>
-                            <label class="text-sm font-medium text-slate-700">Telephone</label>
+                            <label class="text-sm font-medium text-slate-700">Téléphone</label>
                             <input v-model="form.phone" type="text" class="input-shell" />
                         </div>
                     </div>
@@ -85,7 +87,7 @@ const submit = () => form.post(route('clubs.register'));
                     </div>
 
                     <div>
-                        <p class="text-sm font-medium text-slate-700">Clubs souhaites</p>
+                        <p class="text-sm font-medium text-slate-700">Clubs souhaités</p>
                         <div class="mt-3 grid gap-3">
                             <label
                                 v-for="club in clubs"
@@ -103,7 +105,7 @@ const submit = () => form.post(route('clubs.register'));
                     </div>
 
                     <div>
-                        <label class="text-sm font-medium text-slate-700">Message complementaire</label>
+                        <label class="text-sm font-medium text-slate-700">Message complémentaire</label>
                         <textarea v-model="form.notes" rows="4" class="input-shell" />
                     </div>
 

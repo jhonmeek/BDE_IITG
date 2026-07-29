@@ -19,16 +19,20 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Confirm Password" />
+        <Head title="Confirmer le mot de passe" />
 
-        <div class="mb-4 text-sm text-gray-600">
-            This is a secure area of the application. Please confirm your
-            password before continuing.
+        <div class="mb-6">
+            <p class="eyebrow">Zone sécurisée</p>
+            <h2 class="section-title mt-2">Confirmer le mot de passe</h2>
+            <p class="mt-2 text-sm leading-6 text-slate-500">
+                Cette section est protégée. Confirmez votre mot de passe pour
+                continuer.
+            </p>
         </div>
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" value="Mot de passe" />
                 <TextInput
                     id="password"
                     type="password"
@@ -43,11 +47,10 @@ const submit = () => {
 
             <div class="mt-4 flex justify-end">
                 <PrimaryButton
-                    class="ms-4"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Confirm
+                    Confirmer
                 </PrimaryButton>
             </div>
         </form>

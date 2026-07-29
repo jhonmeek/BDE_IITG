@@ -23,42 +23,42 @@ const remove = (id) => router.delete(route('admin.transactions.destroy', id));
 </script>
 
 <template>
-    <AdminLayout title="Tresorerie">
+    <AdminLayout title="Trésorerie">
         <div class="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-            <section class="shell-card overflow-hidden">
-                <table class="min-w-full divide-y divide-slate-200 text-sm">
-                    <thead class="bg-slate-50 text-left text-slate-500">
+            <section class="shell-card table-scroll">
+                <table class="min-w-full text-sm">
+                    <thead class="table-head">
                         <tr>
                             <th class="px-5 py-4">Description</th>
-                            <th class="px-5 py-4">Categorie</th>
+                            <th class="px-5 py-4">Catégorie</th>
                             <th class="px-5 py-4">Montant</th>
                             <th class="px-5 py-4">Date</th>
                             <th class="px-5 py-4"></th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-100">
+                    <tbody>
                         <tr v-for="transaction in transactions" :key="transaction.id">
                             <td class="px-5 py-4 font-medium text-slate-900">{{ transaction.description }}</td>
                             <td class="px-5 py-4">{{ transaction.category }}</td>
-                            <td class="px-5 py-4" :class="transaction.type === 'income' ? 'text-emerald-700' : 'text-rose-700'">
+                            <td class="px-5 py-4" :class="transaction.type === 'income' ? 'amount-in' : 'amount-out'">
                                 {{ formatCurrency(transaction.amount) }}
                             </td>
                             <td class="px-5 py-4">{{ transaction.transaction_date }}</td>
                             <td class="px-5 py-4 text-right">
-                                <a :href="route('admin.transactions.edit', transaction.id)" class="text-amber-700">Modifier</a>
-                                <button class="ml-3 text-rose-700" @click="remove(transaction.id)">Supprimer</button>
+                                <a :href="route('admin.transactions.edit', transaction.id)" class="action-edit">Modifier</a>
+                                <button class="action-delete ml-3" @click="remove(transaction.id)">Supprimer</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </section>
 
-            <section class="shell-card p-6">
-                <h3 class="text-xl font-semibold">Nouvelle transaction</h3>
+            <section class="shell-card p-5 sm:p-6">
+                <h3 class="text-lg font-semibold sm:text-xl">Nouvelle transaction</h3>
                 <form class="mt-5 space-y-4" @submit.prevent="submit">
                     <select v-model="form.type" class="input-shell">
                         <option value="income">Recette</option>
-                        <option value="expense">Depense</option>
+                        <option value="expense">Dépense</option>
                     </select>
                     <select v-model="form.category" class="input-shell">
                         <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>

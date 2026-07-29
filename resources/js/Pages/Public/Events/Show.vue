@@ -24,8 +24,9 @@ const submit = () => form.post(route('events.register', props.event.slug));
 <template>
     <SiteLayout :title="event.name">
         <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-            <article class="shell-card p-8 sm:p-10">
-                <h1 class="mt-5 text-4xl font-semibold">{{ event.name }}</h1>
+            <article class="shell-card card-pad">
+                <p class="eyebrow">Événement</p>
+                <h1 class="page-title mt-2">{{ event.name }}</h1>
                 <img
                     v-if="event.cover_image_url"
                     :src="event.cover_image_url"
@@ -36,13 +37,14 @@ const submit = () => form.post(route('events.register', props.event.slug));
                     <p>Date : {{ formatDateTime(event.starts_at) }}</p>
                     <p>Lieu : {{ event.location }}</p>
                     <p>Budget : {{ formatCurrency(event.budget_allocated) }}</p>
-                    <p v-if="event.capacity">Capacite : {{ event.capacity }}</p>
+                    <p v-if="event.capacity">Capacité : {{ event.capacity }}</p>
                 </div>
                 <p class="mt-6 text-base leading-8 text-slate-600">{{ event.description }}</p>
             </article>
 
-            <div class="shell-card p-6 sm:p-8">
-                <h2 class="mt-4 text-2xl font-semibold">S inscrire a cet evenement</h2>
+            <div class="shell-card card-pad lg:sticky lg:top-24 lg:self-start">
+                <p class="eyebrow">Inscription</p>
+                <h2 class="section-title mt-2">S’inscrire à cet événement</h2>
 
                 <form v-if="event.registration_enabled" class="mt-6 space-y-4" @submit.prevent="submit">
                     <div>
@@ -51,13 +53,13 @@ const submit = () => form.post(route('events.register', props.event.slug));
                         <InputError class="mt-2" :message="form.errors.full_name" />
                     </div>
                     <div>
-                        <label class="text-sm font-medium text-slate-700">Email</label>
+                        <label class="text-sm font-medium text-slate-700">E-mail</label>
                         <input v-model="form.email" type="email" class="input-shell" />
                         <InputError class="mt-2" :message="form.errors.email" />
                     </div>
                     <div class="grid gap-4 sm:grid-cols-2">
                         <div>
-                            <label class="text-sm font-medium text-slate-700">Telephone</label>
+                            <label class="text-sm font-medium text-slate-700">Téléphone</label>
                             <input v-model="form.phone" type="text" class="input-shell" />
                         </div>
                         <div>
@@ -72,14 +74,14 @@ const submit = () => form.post(route('events.register', props.event.slug));
                     <button class="btn-primary w-full" :disabled="form.processing">Valider mon inscription</button>
                 </form>
                 <div v-else class="mt-6 rounded-3xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-600">
-                    Les inscriptions en ligne ne sont pas ouvertes pour cet evenement.
+                    Les inscriptions en ligne ne sont pas ouvertes pour cet événement.
                 </div>
             </div>
         </div>
 
         <section class="mt-12">
-            <h2 class="text-2xl font-semibold">Autres evenements a venir</h2>
-            <div class="mt-6 grid gap-5 md:grid-cols-3">
+            <h2 class="section-title section-title--rule">Autres événements à venir</h2>
+            <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 <article v-for="item in relatedEvents" :key="item.id" class="shell-card p-5">
                     <img
                         v-if="item.cover_image_url"
@@ -87,7 +89,7 @@ const submit = () => form.post(route('events.register', props.event.slug));
                         :alt="item.name"
                         class="mb-4 aspect-[16/9] w-full rounded-[1.25rem] object-cover"
                     />
-                    <p class="text-sm font-medium" style="color: var(--bde-gold-text);">{{ formatDateTime(item.starts_at) }}</p>
+                    <p class="text-accent text-sm font-medium">{{ formatDateTime(item.starts_at) }}</p>
                     <h3 class="mt-3 text-xl font-semibold">{{ item.name }}</h3>
                     <p class="mt-3 text-sm leading-6 text-slate-600">{{ item.excerpt }}</p>
                     <Link :href="route('events.show', item.slug)" class="mt-4 inline-flex text-sm font-semibold" style="color: var(--bde-red);">

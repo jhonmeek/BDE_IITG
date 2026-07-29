@@ -26,7 +26,7 @@ const submit = () => form.post(route('admin.clubs.update', props.club.id), { met
 
 <template>
     <AdminLayout title="Modifier un club">
-        <section class="shell-card max-w-3xl p-6">
+        <section class="shell-card card-pad max-w-3xl">
             <form class="space-y-4" @submit.prevent="submit">
                 <input v-model="form.name" type="text" class="input-shell" placeholder="Nom du club" />
                 <input v-model="form.slug" type="text" class="input-shell" placeholder="slug" />
@@ -34,7 +34,7 @@ const submit = () => form.post(route('admin.clubs.update', props.club.id), { met
                     <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
                 </select>
                 <input v-model="form.lead_name" type="text" class="input-shell" placeholder="Responsable" />
-                <input v-model="form.summary" type="text" class="input-shell" placeholder="Resume court" />
+                <input v-model="form.summary" type="text" class="input-shell" placeholder="Résumé court" />
                 <textarea v-model="form.description" rows="5" class="input-shell" placeholder="Description" />
                 <input v-model="form.budget_allocated" type="number" class="input-shell" placeholder="Budget" />
                 <select v-model="form.status" class="input-shell">
@@ -42,10 +42,10 @@ const submit = () => form.post(route('admin.clubs.update', props.club.id), { met
                 </select>
                 <input type="file" class="input-shell" @input="form.image = $event.target.files[0]" />
                 <label class="flex items-center gap-3 text-sm text-slate-600">
-                    <input v-model="form.is_published" type="checkbox" class="rounded border-slate-300 text-amber-600" />
+                    <input v-model="form.is_published" type="checkbox" class="field-check" />
                     Club visible publiquement
                 </label>
-                <button class="btn-primary" :disabled="form.processing">Mettre a jour</button>
+                <button class="btn-primary" :disabled="form.processing">Mettre à jour</button>
             </form>
         </section>
     </AdminLayout>
